@@ -6,7 +6,7 @@ const identity = function(text){
 }
 
 const increment = function(number){
-  return number+1;
+  return ++number;
 }
 
 describe('map',function(){
@@ -19,6 +19,8 @@ describe('map',function(){
   it('should return increment values of elements in array',function(){
     assert.deepEqual(map(increment,[1]),[2]);
     assert.deepEqual(map(increment,[]),[]);
+    assert.deepEqual(map(increment,[1,2,3]),[2,3,4]);
+    assert.deepEqual(map(increment,[23,55,67]),[24,56,68]);
   });
 });
 
