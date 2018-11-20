@@ -28,6 +28,9 @@ describe('map',function(){
   });
   it('should return square of elements of array',function(){
     assert.deepEqual(map(square,[2]),[4]);
+    assert.deepEqual(map(square,[]),[]);
+    assert.deepEqual(map(square,[1,2,3]),[1,4,9]);
+    assert.deepEqual(map(square,[2,4,6]),[4,16,36]);
   });
 });
 
