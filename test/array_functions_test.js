@@ -9,6 +9,10 @@ const increment = function(number){
   return ++number;
 }
 
+const square = function(number){
+  return number*number;
+}
+
 describe('map',function(){
   it('should return the array with same element as input',function(){
     assert.deepEqual(map(identity,[1]),[1]);
@@ -21,6 +25,9 @@ describe('map',function(){
     assert.deepEqual(map(increment,[]),[]);
     assert.deepEqual(map(increment,[1,2,3]),[2,3,4]);
     assert.deepEqual(map(increment,[23,55,67]),[24,56,68]);
+  });
+  it('should return square of elements of array',function(){
+    assert.deepEqual(map(square,[2]),[4]);
   });
 });
 
