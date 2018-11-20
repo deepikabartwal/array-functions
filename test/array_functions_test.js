@@ -51,5 +51,6 @@ describe('filter',function(){
   it('should give only even numbers',function(){
     assert.deepEqual(filter(isEven,[1]),[]);
     assert.deepEqual(filter(isEven,[]),[]);
+    assert.deepEqual(filter(isEven,[2]),[2]);
   });
 });
