@@ -8,6 +8,9 @@ const identity = function(text){
 //testing map for identity function
 const testMapIdentityFunctions = function(){
   assert.deepEqual(map(identity,[1]),[1]);
+  assert.deepEqual(map(identity,[]),[]);
+  assert.deepEqual(map(identity,[1,2]),[1,2]);
+  assert.deepEqual(map(identity,["a","b","c"]),["a","b","c"]);
 }
 
 const runTest = function(){
