@@ -53,5 +53,6 @@ describe('filter',function(){
     assert.deepEqual(filter(isEven,[]),[]);
     assert.deepEqual(filter(isEven,[2]),[2]);
     assert.deepEqual(filter(isEven,[1,2]),[2]);
+    assert.deepEqual(filter(isEven,[1,2,3,4,5,6]),[2,4,6]);
   });
 });
