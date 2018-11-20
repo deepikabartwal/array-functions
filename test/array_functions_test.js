@@ -39,6 +39,8 @@ describe('map',function(){
   it('should return length of each elements of array',function(){
     assert.deepEqual(map(calculateLength,['a']),[1]);
     assert.deepEqual(map(calculateLength,[]),[]);
+    assert.deepEqual(map(calculateLength,["ab"]),[2]);
+    assert.deepEqual(map(calculateLength,['a','it','is','a','cat']),[1,2,2,1,3]);
   });
 });
 
