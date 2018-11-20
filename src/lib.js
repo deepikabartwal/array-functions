@@ -5,5 +5,14 @@ const map = function(callbackFunction,record){
   }
   return newArray;
 }
-exports.map = map
-  ;
+const filter = function(callbackFunction,record){
+  let newArray = [];
+  for(let element of record){
+    if(callbackFunction(element)){
+      newArray.push(element);
+    }
+  }
+  return newArray;
+}
+exports.map = map;
+exports.filter = filter;

@@ -1,5 +1,4 @@
-const lib = require("../src/lib.js");
-const map = lib.map;
+const {map,filter} = require("../src/lib.js");
 const assert = require("assert");
 const identity = function(text){
   return text;
@@ -15,6 +14,10 @@ const square = function(number){
 
 const calculateLength = function(text){
   return text.length;
+}
+
+const isEven = function(number){
+  return number%2==0;
 }
 
 describe('map',function(){
@@ -44,3 +47,9 @@ describe('map',function(){
   });
 });
 
+describe('filter',function(){
+  it('should give only even numbers',function(){
+    assert.deepEqual(filter(isEven,[1]),[]);
+    assert.deepEqual(filter(isEven,[]),[]);
+  });
+});
