@@ -20,6 +20,12 @@ const isEven = function(number){
   return number%2==0;
 }
 
+const aboveThreshold = function(threshold){
+  return function(number){
+    return number>threshold;
+  }
+}
+
 describe('map',function(){
   it('should return the array with same element as input',function(){
     assert.deepEqual(map(identity,[1]),[1]);
@@ -54,5 +60,8 @@ describe('filter',function(){
     assert.deepEqual(filter(isEven,[2]),[2]);
     assert.deepEqual(filter(isEven,[1,2]),[2]);
     assert.deepEqual(filter(isEven,[1,2,3,4,5,6]),[2,4,6]);
+  });
+  it('should give only the numbers above threshold',function(){
+    assert.deepEqual(filter(aboveThreshold(0),[1]),[1]);
   });
 });
