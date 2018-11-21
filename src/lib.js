@@ -1,18 +1,18 @@
-const map = function(callbackFunction,record){
-  let newArray = [];
+const map = function(mapper,record){
+  let mappedRecord = [];
   for(let element of record){
-    newArray.push(callbackFunction(element));
+    mappedRecord.push(mapper(element));
   }
-  return newArray;
+  return mappedRecord;
 }
-const filter = function(callbackFunction,record){
-  let newArray = [];
+const filter = function(predictor,record){
+  let filteredRecord = [];
   for(let element of record){
-    if(callbackFunction(element)){
-      newArray.push(element);
+    if(predictor(element)){
+      filteredRecord.push(element);
     }
   }
-  return newArray;
+  return filteredRecord;
 }
 exports.map = map;
 exports.filter = filter;
