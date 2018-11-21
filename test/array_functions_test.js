@@ -62,7 +62,8 @@ describe('filter',function(){
     assert.deepEqual(filter(isEven,[1,2,3,4,5,6]),[2,4,6]);
   });
   it('should give only the numbers above threshold',function(){
-    assert.deepEqual(filter(aboveThreshold(0),[1]),[1]);
-    
+    assert.deepEqual(filter(aboveThreshold(0),[1]),[1]); 
+    assert.deepEqual(filter(aboveThreshold(0),[]),[]);
+    assert.deepEqual(filter(aboveThreshold(1),[1]),[]);
   });
 });
