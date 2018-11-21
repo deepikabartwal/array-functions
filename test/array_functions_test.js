@@ -65,5 +65,7 @@ describe('filter',function(){
     assert.deepEqual(filter(aboveThreshold(0),[1]),[1]); 
     assert.deepEqual(filter(aboveThreshold(0),[]),[]);
     assert.deepEqual(filter(aboveThreshold(1),[1]),[]);
+    assert.deepEqual(filter(aboveThreshold(1),[1,2,3]),[2,3]);
+    assert.deepEqual(filter(aboveThreshold(4),[1,15,3,5,6,7,8,9,11,13,2,17]),[15,5,6,7,8,9,11,13,17]);
   });
 });
