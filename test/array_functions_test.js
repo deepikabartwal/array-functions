@@ -92,5 +92,8 @@ describe('filter',function(){
   it('should give only vowels',function(){
     assert.deepEqual(filter(isVowel,['a']),['a']);
     assert.deepEqual(filter(isVowel,[]),[]);
+    assert.deepEqual(filter(isVowel,['b']),[]);
+    assert.deepEqual(filter(isVowel,['a','b']),['a']);
+    assert.deepEqual(filter(isVowel,['e','b','a']),['e','a']);
   });
 });
