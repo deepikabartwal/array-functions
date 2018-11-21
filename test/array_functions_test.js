@@ -26,6 +26,27 @@ const aboveThreshold = function(threshold){
   }
 }
 
+const isVowel = function(character){
+  let lowerVowels = "aeiou";
+  let upperVowels = "AEIOU";
+  let vowels = lowerVowels + upperVowels;
+  for(let vowelPosition=0; vowelPosition < vowels.length; vowelPosition++){
+    if(vowels[vowelPosition]==character){
+      return true;
+    }
+  }
+  return false;
+}
+
+const containsVowel = function(text){
+  for(let letterPosition = 0; letterPosition<text.length; letterPosition++){
+    if(isVowel(text[letterPosition])){
+      return true;
+    }
+    return false;
+  }
+}
+
 describe('map',function(){
   it('should return the array with same element as input',function(){
     assert.deepEqual(map(identity,[1]),[1]);
@@ -67,5 +88,9 @@ describe('filter',function(){
     assert.deepEqual(filter(aboveThreshold(1),[1]),[]);
     assert.deepEqual(filter(aboveThreshold(1),[1,2,3]),[2,3]);
     assert.deepEqual(filter(aboveThreshold(4),[1,15,3,5,6,7,8,9,11,13,2,17]),[15,5,6,7,8,9,11,13,17]);
+  });
+  it('should give only vowels',function(){
+    assert.deepEqual(filter(isVowel,['a']),['a']);
+    assert.deepEqual(filter(isVowel,[]),[]);
   });
 });
