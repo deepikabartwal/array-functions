@@ -96,4 +96,8 @@ describe('filter',function(){
     assert.deepEqual(filter(isVowel,['a','b']),['a']);
     assert.deepEqual(filter(isVowel,['e','b','a']),['e','a']);
   });
+  it('should give text with vowels',function(){
+    assert.deepEqual(filter(containsVowel,['bbq']),[]);
+    assert.deepEqual(filter(containsVowel,[]),[]);
+  });
 });
