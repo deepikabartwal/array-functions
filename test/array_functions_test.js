@@ -1,4 +1,4 @@
-const {map,filter} = require("../src/lib.js");
+const {map,filter,reduce} = require("../src/lib.js");
 const assert = require("assert");
 const identity = function(text){
   return text;
@@ -15,6 +15,8 @@ const square = function(number){
 const calculateLength = function(text){
   return text.length;
 }
+
+const makeConstant = (x) => ()=>x;
 
 const isEven = function(number){
   return number%2==0;
@@ -47,6 +49,14 @@ const containsVowel = function(text){
   return false;
 }
 
+const greaterNumber = function(number1,number2){
+  return Math.max(number1,number2);
+}
+
+const sum = function(number1,number2){
+  return number1+number2;
+}
+
 describe('map',function(){
   describe('for single element array',function(){
     it('should return single element array for single element array',function(){
@@ -65,7 +75,7 @@ describe('map',function(){
     });
   });
   describe('for multiple element array',function(){
-    it('should return array with equal number of elements',function(){
+    it('should return array with equal number of elements for multiple element array',function(){
       assert.deepEqual(map(identity,[1,2]),[1,2]);
       assert.deepEqual(map(identity,["a","b","c"]),["a","b","c"]);
       assert.deepEqual(map(increment,[1,2,3]),[2,3,4]);
@@ -76,32 +86,55 @@ describe('map',function(){
 });
 
 describe('filter',function(){
-  it('should give only even numbers',function(){
-    assert.deepEqual(filter(isEven,[1]),[1]);
-    assert.deepEqual(filter(isEven,[]),[]);
-    assert.deepEqual(filter(isEven,[2]),[2]);
-    assert.deepEqual(filter(isEven,[1,2]),[2]);
-    assert.deepEqual(filter(isEven,[1,2,3,4,5,6]),[2,4,6]);
+  describe("for empty array",function(){
+    it('should return empty array',function(){
+      assert.deepEqual(filter(makeConstant(true),[]),[]);
+      assert.deepEqual(filter(isEven,[]),[]);
+    });
   });
-  it('should give only the numbers above threshold',function(){
-    assert.deepEqual(filter(aboveThreshold(0),[1]),[1]); 
-    assert.deepEqual(filter(aboveThreshold(0),[]),[]);
-    assert.deepEqual(filter(aboveThreshold(1),[1]),[]);
-    assert.deepEqual(filter(aboveThreshold(1),[1,2,3]),[2,3]);
-    assert.deepEqual(filter(aboveThreshold(4),[1,15,3,5,6,7,8,9,11,13,2,17]),[15,5,6,7,8,9,11,13,17]);
+  describe("for single element array for true value",function(){
+    it('should return single element array',function(){
+      assert.deepEqual(filter(makeConstant(true),[1]),[1]);
+      assert.deepEqual(filter(isEven,[2]),[2]);
+    });
   });
-  it('should give only vowels',function(){
-    assert.deepEqual(filter(isVowel,['a']),['a']);
-    assert.deepEqual(filter(isVowel,[]),[]);
-    assert.deepEqual(filter(isVowel,['b']),[]);
-    assert.deepEqual(filter(isVowel,['a','b']),['a']);
-    assert.deepEqual(filter(isVowel,['e','b','a']),['e','a']);
+  describe("for single element array for false value",function(){
+    it('should return empty array',function(){
+      assert.deepEqual(filter(makeConstant(false),[1]),[]);
+      assert.deepEqual(filter(isEven,[1]),[]);
+    });
   });
-  it('should give text with vowels',function(){
-    assert.deepEqual(filter(containsVowel,['bbq']),[]);
-    assert.deepEqual(filter(containsVowel,[]),[]);
-    assert.deepEqual(filter(containsVowel,['are','bd','keep']),['are','keep']);
-    assert.deepEqual(filter(containsVowel,['athul','by','grr','bbq','durga','fry','cry','myth']),['athul','durga']);
+  describe("for multiple element array",function(){
+    it('should return array of equal length as of the input array',function(){
+      assert.deepEqual(filter(makeConstant(true),[2,3,4,5,6]),[2,3,4,5,6]);
+    });
+  });
+  describe('for multiple element array when alternate elements fulfil predicator', function(){
+    it('should return only alternate elementsof array', function(){
+      assert.deepEqual(filter(isEven,[1,2]),[2]);
+      assert.deepEqual(filter(isEven,[1,2,3,4,5,6]),[2,4,6]);
+    });
+  });
+});
+
+describe("reduce",function(){
+  describe("for empty array",function(){
+  it("should return accumulator when array is empty",function(){
+    assert.deepEqual(reduce(greaterNumber,[],1),1);
+    assert.deepEqual(reduce(sum,[],1),1);
+  });
+  });
+  describe("for no initial value given",function(){
+    it("should return value when accumulator is empty and array non empty",function(){
+      assert.deepEqual(reduce(greaterNumber,[1,2]),2);
+      assert.deepEqual(reduce(sum,[1,2]),3);
+    });
+  });
+  describe("for non empty array and initial value",function(){
+    it("should return value when accumulator and array are not empty",function(){
+      assert.deepEqual(reduce(greaterNumber,[1,2,3,4],5),5);
+      assert.deepEqual(reduce(sum,[1,2,3,4],5),15);
+    });
   });
 });
 

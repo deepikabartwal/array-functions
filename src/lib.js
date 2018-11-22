@@ -5,14 +5,28 @@ const map = function(mapper,record){
   }
   return mappedRecord;
 }
-const filter = function(predictor,record){
+const filter = function(predicate,record){
   let filteredRecord = [];
   for(let element of record){
-    if(predictor(element)){
+    if(predicate(element)){
       filteredRecord.push(element);
     }
   }
   return filteredRecord;
 }
+
+const reduce = function(reducer,record,initialValue){
+  let accumulator =  initialValue;
+  let index = 0;
+  if(accumulator==undefined){
+    accumulator = record[0];
+    index = 1
+  }
+  while(index<record.length){
+    accumulator = reducer(accumulator,record[index++]);
+  }
+  return accumulator;
+}
+exports.reduce = reduce;
 exports.map = map;
 exports.filter = filter;
