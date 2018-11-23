@@ -1,4 +1,4 @@
-const {map,filter,reduce} = require("../src/lib.js");
+const {map,filter,reduce,reduceRecursive} = require("../src/lib.js");
 const assert = require("assert");
 const identity = function(text){
   return text;
@@ -137,4 +137,23 @@ describe("reduce",function(){
     });
   });
 });
-
+describe("reduceRecursive",function(){
+  describe("for empty array",function(){
+  it("should return accumulator when array is empty",function(){
+    assert.deepEqual(reduceRecursive(greaterNumber,[],1),1);
+    assert.deepEqual(reduceRecursive(sum,[],1),1);
+  });
+  });
+  describe("for no initial value given",function(){
+    it("should return value when accumulator is empty and array non empty",function(){
+      assert.deepEqual(reduceRecursive(greaterNumber,[1,2]),2);
+      assert.deepEqual(reduceRecursive(sum,[1,2]),3);
+    });
+  });
+  describe("for non empty array and initial value",function(){
+    it("should return value when accumulator and array are not empty",function(){
+      assert.deepEqual(reduceRecursive(greaterNumber,[1,2,3,4],5),5);
+      assert.deepEqual(reduceRecursive(sum,[1,2,3,4],5),15);
+    });
+  });
+});

@@ -27,6 +27,22 @@ const reduce = function(reducer,record,initialValue){
   }
   return accumulator;
 }
+
+const reduceRecursive = function(reducer,record,initialValue){
+  let sourceRecord = record.slice();
+  let accumulator = initialValue;
+  if(initialValue == undefined){
+    accumulator = sourceRecord[0];
+    sourceRecord = record.slice(1);
+  }
+  if(sourceRecord.length){
+    accumulator = reducer(accumulator,sourceRecord[0]);
+    return reduceRecursive(reducer,sourceRecord.slice(1),accumulator);
+  }
+  return accumulator;
+}
+
+exports.reduceRecursive = reduceRecursive;
 exports.reduce = reduce;
 exports.map = map;
 exports.filter = filter;
