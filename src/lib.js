@@ -28,20 +28,28 @@ const reduce = function(reducer,record,initialValue){
   return accumulator;
 }
 
-const reduceRecursive = function(reducer,record,initialValue){
-  let sourceRecord = record.slice();
-  let accumulator = initialValue;
-  if(initialValue == undefined){
+const reduceRecursive = function(reducer,sourceRecord,accumulator){
+  if(accumulator== undefined){
     accumulator = sourceRecord[0];
-    sourceRecord = record.slice(1);
+    sourceRecord = sourceRecord.slice(1);
   }
-  if(sourceRecord.length){
-    accumulator = reducer(accumulator,sourceRecord[0]);
-    return reduceRecursive(reducer,sourceRecord.slice(1),accumulator);
+  if(!sourceRecord.length){
+    return accumulator;
   }
-  return accumulator;
+  accumulator = reducer(accumulator,sourceRecord[0]);
+  return reduceRecursive(reducer,sourceRecord.slice(1),accumulator);
 }
 
+const mapRecursive = function(mapper,sourceRecord){
+  if(sourceRecord.length==0){
+    return [];
+  }
+  let result = mapper(sourceRecord[sourceRecord.length-1]);
+  sourceRecord = sourceRecord.slice(0,sourceRecord.length-1);
+  return mapRecursive(mapper,sourceRecord).concat(result);
+}
+
+exports.mapRecursive = mapRecursive;
 exports.reduceRecursive = reduceRecursive;
 exports.reduce = reduce;
 exports.map = map;

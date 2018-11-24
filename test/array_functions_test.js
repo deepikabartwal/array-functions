@@ -1,4 +1,4 @@
-const {map,filter,reduce,reduceRecursive} = require("../src/lib.js");
+const {map,filter,reduce,reduceRecursive,mapRecursive} = require("../src/lib.js");
 const assert = require("assert");
 const identity = function(text){
   return text;
@@ -157,3 +157,32 @@ describe("reduceRecursive",function(){
     });
   });
 });
+
+describe('mapRecursive',function(){
+  describe('for single element array',function(){
+    it('should return single element array for single element array',function(){
+      assert.deepEqual(mapRecursive(identity,[1]),[1]);
+      assert.deepEqual(mapRecursive(increment,[1]),[2]);
+      assert.deepEqual(mapRecursive(square,[2]),[4]);
+      assert.deepEqual(mapRecursive(calculateLength,['a']),[1]);
+    });
+  });
+  describe('for empty array',function(){
+    it('should return empty array for empty array',function(){
+      assert.deepEqual(mapRecursive(identity,[]),[]);
+      assert.deepEqual(mapRecursive(increment,[]),[]);
+      assert.deepEqual(mapRecursive(square,[]),[]);
+      assert.deepEqual(mapRecursive(calculateLength,[]),[]);
+    });
+  });
+  describe('for multiple element array',function(){
+    it('should return array with equal number of elements for multiple element array',function(){
+      assert.deepEqual(mapRecursive(identity,[1,2]),[1,2]);
+      assert.deepEqual(mapRecursive(identity,["a","b","c"]),["a","b","c"]);
+      assert.deepEqual(mapRecursive(increment,[1,2,3]),[2,3,4]);
+      assert.deepEqual(mapRecursive(square,[1,2,3]),[1,4,9]);
+      assert.deepEqual(mapRecursive(calculateLength,['a','it','is','a','cat']),[1,2,2,1,3]);
+    });
+  });
+});
+
