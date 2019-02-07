@@ -10,4 +10,4 @@ jobs:
           command: npm install
       - run:
           name: run-tests
-          command: test
+          command: mocha
