@@ -1,0 +1,25 @@
+{
+  "name": "map-reduce-filter-using-js",
+  "version": "1.0.0",
+  "description": "map, filter and reduce function written using javascript ",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepikabartwal/array-functions.git"
+  },
+  "author": "deepika",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deepikabartwal/array-functions/issues"
+  },
+  "homepage": "https://github.com/deepikabartwal/array-functions#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
